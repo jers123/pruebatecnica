@@ -1,6 +1,9 @@
 package org.javatest.assetdepreciation.service;
 
-import org.javatest.assetdepreciation.model.dto.*;
+import org.javatest.assetdepreciation.model.dto.ActiveDTO;
+import org.javatest.assetdepreciation.model.dto.ActiveResult;
+import org.javatest.assetdepreciation.model.dto.ActiveResults;
+import org.javatest.assetdepreciation.model.dto.Depreciacion;
 import org.javatest.assetdepreciation.model.entity.Active;
 import org.javatest.assetdepreciation.model.repository.ActiveRepository;
 import org.javatest.assetdepreciation.utils.ActiveMapper;
@@ -15,7 +18,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.javatest.assetdepreciation.utils.Constants.*;
+import static org.javatest.assetdepreciation.utils.Constants.ACTIVE_SERIAL_EXISTS;
+import static org.javatest.assetdepreciation.utils.Constants.NO_CONTENT;
+import static org.javatest.assetdepreciation.utils.Constants.NO_CONTENT_ID;
+import static org.javatest.assetdepreciation.utils.Constants.SUCCESSFULLY_CREATED_ACTIVE;
+import static org.javatest.assetdepreciation.utils.Constants.SUCCESSFULLY_DELETED_ACTIVE;
+import static org.javatest.assetdepreciation.utils.Constants.SUCCESSFULLY_UPDATED_ACTIVE;
+import static org.javatest.assetdepreciation.utils.Constants.YES_CONTENT;
 
 @Service
 @Validated
@@ -40,7 +49,7 @@ public class ActiveService implements IBaseService {
             if (serial == null) {
                 Active entity = mapper.create(entityDto);
                 ActiveResult entityresult = mapper.read(repository.save(entity));
-                entityresult.setDepresiaciones(getDepreciation(entityresult));
+                entityresult.setDepreciaciones(getDepreciation(entityresult));
                 replyMessage.setHttpStatus(HttpStatus.CREATED);
                 replyMessage.setError(false);
                 messages.add(SUCCESSFULLY_CREATED_ACTIVE);
@@ -95,7 +104,7 @@ public class ActiveService implements IBaseService {
             Active entity = repository.findById(id).orElse(null);
             if (entity != null) {
                 ActiveResult entityDto = mapper.read(entity);
-                entityDto.setDepresiaciones(getDepreciation(entityDto));
+                entityDto.setDepreciaciones(getDepreciation(entityDto));
                 replyMessage.setHttpStatus(HttpStatus.OK);
                 replyMessage.setError(false);
                 messages.add(YES_CONTENT);
@@ -125,7 +134,7 @@ public class ActiveService implements IBaseService {
                 if (serial == null) {
                     entity = mapper.update(entityDto, entity);
                     ActiveResult entityresult = mapper.read(repository.save(entity));
-                    entityresult.setDepresiaciones(getDepreciation(entityresult));
+                    entityresult.setDepreciaciones(getDepreciation(entityresult));
                     replyMessage.setHttpStatus(HttpStatus.CREATED);
                     replyMessage.setError(false);
                     messages.add(SUCCESSFULLY_UPDATED_ACTIVE);
@@ -174,18 +183,18 @@ public class ActiveService implements IBaseService {
 
     private List<Depreciacion> getDepreciation(ActiveResult entityDto) {
         List<Depreciacion> depreciaciones = new ArrayList<>();
-        int usefulLife = entityDto.getTipoDepresiacion().getVidaUtil();
+        int usefulLife = entityDto.getTipoDepreciacion().getVidaUtil();
         Depreciacion depreciacion;
         LocalDate date = entityDto.getFechaCompra();
         Double depresiationValue = entityDto.getValorCompra();
-        Double percentage = depresiationValue * (entityDto.getTipoDepresiacion().getPorsentajeAnual() /100);
+        Double percentage = depresiationValue * (entityDto.getTipoDepreciacion().getPorcentajeAnual() /100);
         for(int i = 1; i <= usefulLife; i++) {
             depreciacion = new Depreciacion();
             depreciacion.setAnioNumero(i);
             date = date.plusYears(1);
             depreciacion.setFecha(date);
             depresiationValue = depresiationValue - percentage;
-            depreciacion.setValorDepresiacion(Math.round(depresiationValue * 100) / 100.0);
+            depreciacion.setValorDepreciacion(Math.round(depresiationValue * 100) / 100.0);
             depreciaciones.add(depreciacion);
         }
         return depreciaciones;

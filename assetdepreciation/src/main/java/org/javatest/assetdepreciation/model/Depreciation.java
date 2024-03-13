@@ -22,7 +22,7 @@ public enum Depreciation {
 
     private final String activeType;
     private final Integer usefulLife;
-    private final double annualPercentage;
+    private final Double annualPercentage;
 
     Depreciation(String activeType, Integer usefulLife, double annualPercentage) {
         this.activeType = activeType;

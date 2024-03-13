@@ -12,5 +12,5 @@ import lombok.ToString;
 public class DepresiationType {
     private String tipoActivo;
     private Integer vidaUtil;
-    private Double porsentajeAnual;
+    private Double porcentajeAnual;
 }

@@ -14,5 +14,5 @@ import java.time.LocalDate;
 public class Depreciacion {
     private Integer anioNumero;
     private LocalDate fecha;
-    private Double valorDepresiacion;
+    private Double valorDepreciacion;
 }

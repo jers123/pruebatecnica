@@ -31,7 +31,7 @@ public class ActiveMapper {
         entityDto.setFechaCompra(entity.getPurchaseDate());
         entityDto.setValorCompra(entity.getPurchaseValue());
         entityDto.setDepreciacion(entity.getDepreciationType());
-        entityDto.setTipoDepresiacion(readDepresiationType(entity.getDepreciationType()));
+        entityDto.setTipoDepreciacion(readDepresiationType(entity.getDepreciationType()));
         return entityDto;
     }
 
@@ -44,7 +44,7 @@ public class ActiveMapper {
         entityDto.setFechaCompra(entity.getPurchaseDate());
         entityDto.setValorCompra(entity.getPurchaseValue());
         entityDto.setDepreciacion(entity.getDepreciationType());
-        entityDto.setTipoDepresiacion(readDepresiationType(entity.getDepreciationType()));
+        entityDto.setTipoDepreciacion(readDepresiationType(entity.getDepreciationType()));
         return entityDto;
     }
 
@@ -58,11 +58,11 @@ public class ActiveMapper {
         return entity;
     }
 
-    private DepresiationType readDepresiationType(Depreciation depreciation) {
+    protected DepresiationType readDepresiationType(Depreciation depreciation) {
         DepresiationType depreciationType = new DepresiationType();
         depreciationType.setTipoActivo(depreciation.getActiveType());
         depreciationType.setVidaUtil(depreciation.getUsefulLife());
-        depreciationType.setPorsentajeAnual(depreciation.getAnnualPercentage());
+        depreciationType.setPorcentajeAnual(depreciation.getAnnualPercentage());
         return depreciationType;
     }
 }

@@ -14,5 +14,5 @@ import static org.javatest.assetdepreciation.utils.SystemConstants.SERIAL;
 public interface ActiveRepository extends JpaRepository<Active, Integer> {
 
     @Query(value = ACTIVE_SERIAL_QUERY)
-    String searchBySerial(@Param(ID) Integer id, @Param(SERIAL) String name);
+    String searchBySerial(@Param(ID) Integer id, @Param(SERIAL) String serial);
 }

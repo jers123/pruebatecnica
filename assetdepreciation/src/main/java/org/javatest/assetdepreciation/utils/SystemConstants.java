@@ -11,7 +11,7 @@ public class SystemConstants {
     public static final String GET_ALL_PATH = "/get-all";
     public static final String GET_ID_PATH = "/get-id/";
     public static final String UPDATE_PATH = "/update";
-    public static final String CONTENT_TYPE = "Content-Type";
+    protected static final String CONTENT_TYPE = "Content-Type";
 
     // DATABASE
     public static final String DATABASE = "test";

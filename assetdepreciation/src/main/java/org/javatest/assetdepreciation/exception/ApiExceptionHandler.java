@@ -83,7 +83,7 @@ public class ApiExceptionHandler {
         return answer(replyMessage);
     }
 
-    private String supportedMethods(HttpRequestMethodNotSupportedException exception) {
+    protected String supportedMethods(HttpRequestMethodNotSupportedException exception) {
         String method = exception.getSupportedHttpMethods().toString();
         method = method.replace("[","");
         method = method.replace("]","");

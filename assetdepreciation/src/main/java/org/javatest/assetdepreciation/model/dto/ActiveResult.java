@@ -12,5 +12,5 @@ import java.util.List;
 @Setter
 @ToString
 public class ActiveResult extends ActiveResults {
-    List<Depreciacion> depresiaciones;
+    List<Depreciacion> depreciaciones;
 }
