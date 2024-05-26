@@ -181,7 +181,7 @@ public class ActiveService implements IBaseService {
         return replyMessage;
     }
 
-    private List<Depreciacion> getDepreciation(ActiveResult entityDto) {
+    protected List<Depreciacion> getDepreciation(ActiveResult entityDto) {
         List<Depreciacion> depreciaciones = new ArrayList<>();
         int usefulLife = entityDto.getTipoDepreciacion().getVidaUtil();
         Depreciacion depreciacion;

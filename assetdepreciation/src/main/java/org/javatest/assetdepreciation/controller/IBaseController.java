@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import static org.javatest.assetdepreciation.utils.SystemConstants.CREATE_PATH;
 import static org.javatest.assetdepreciation.utils.SystemConstants.DELETE_PATH;
@@ -20,17 +21,22 @@ import static org.javatest.assetdepreciation.utils.SystemConstants.UPDATE_PATH;
 
 public interface IBaseController {
     @PostMapping(value = CREATE_PATH)
+    @ResponseBody
     ResponseEntity<ReplyMessage> create(@Valid @RequestBody ActiveDTO entityDto);
 
     @GetMapping(GET_ALL_PATH)
+    @ResponseBody
     ResponseEntity<ReplyMessage> getAll();
 
     @GetMapping(GET_ID_PATH + "{" + ID + "}")
+    @ResponseBody
     ResponseEntity<ReplyMessage> getById(@PathVariable(ID) Integer id);
 
     @PutMapping(UPDATE_PATH)
+    @ResponseBody
     ResponseEntity<ReplyMessage> update(@Valid @RequestBody ActiveDTO entityDto);
 
     @DeleteMapping(DELETE_PATH + "{" + ID + "}")
+    @ResponseBody
     ResponseEntity<ReplyMessage> delete(@PathVariable(ID) Integer id);
 }

@@ -1,6 +1,9 @@
 package org.javatest.assetdepreciation.utils;
 
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@TestMethodOrder(OrderAnnotation.class)
 class SystemConstantsTest {
 
     @Test
+    @Order(1)
     void testNotNullConstants() {
         assertNotNull(SystemConstants.LOCAL_ORIGIN_PATH);
         assertNotNull(SystemConstants.ASSET_DEPRECIATION_PATH);
@@ -39,10 +44,12 @@ class SystemConstantsTest {
         assertNotNull(SystemConstants.PURCHASE_VALUE);
         assertNotNull(SystemConstants.SERIAL);
         assertNotNull(SystemConstants.SERIAL_LENGTH);
+        assertNotNull(SystemConstants.ACTIVE_ID_QUERY);
         assertNotNull(SystemConstants.ACTIVE_SERIAL_QUERY);
     }
 
     @Test
+    @Order(2)
     void testNotEmptyConstants() {
         assertFalse(SystemConstants.LOCAL_ORIGIN_PATH.isEmpty());
         assertFalse(SystemConstants.ASSET_DEPRECIATION_PATH.isEmpty());
@@ -62,10 +69,12 @@ class SystemConstantsTest {
         assertFalse(SystemConstants.PURCHASE_DATE.isEmpty());
         assertFalse(SystemConstants.PURCHASE_VALUE.isEmpty());
         assertFalse(SystemConstants.SERIAL.isEmpty());
+        assertFalse(SystemConstants.ACTIVE_ID_QUERY.isEmpty());
         assertFalse(SystemConstants.ACTIVE_SERIAL_QUERY.isEmpty());
     }
 
     @Test
+    @Order(3)
     void testEquealsConstants() {
         assertEquals("http://localhost:8080", SystemConstants.LOCAL_ORIGIN_PATH);
         assertEquals("/assetdepreciation", SystemConstants.ASSET_DEPRECIATION_PATH);
@@ -88,10 +97,12 @@ class SystemConstantsTest {
         assertEquals("valor_compra", SystemConstants.PURCHASE_VALUE);
         assertEquals("serial", SystemConstants.SERIAL);
         assertEquals(10, SystemConstants.SERIAL_LENGTH);
+        assertEquals("SELECT a FROM Active a WHERE a.idActive = :id", SystemConstants.ACTIVE_ID_QUERY);
         assertEquals("SELECT a.serial FROM Active a WHERE LOWER(a.serial) = LOWER(:serial) AND a.idActive != :id", SystemConstants.ACTIVE_SERIAL_QUERY);
     }
 
     @Test
+    @Order(4)
     void testAnswer() {
         ReplyMessage replyMessage = new ReplyMessage();
         replyMessage.setDate(LocalDateTime.of(2024, 3, 11, 10, 30, 10));

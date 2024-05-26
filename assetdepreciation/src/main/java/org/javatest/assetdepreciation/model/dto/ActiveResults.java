@@ -10,5 +10,5 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ActiveResults extends ActiveDTO {
-    private DepresiationType tipoDepreciacion;
+    private DepreciationType tipoDepreciacion;
 }

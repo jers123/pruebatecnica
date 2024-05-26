@@ -9,7 +9,7 @@ class DepresiationTypeTest {
 
     @Test
     void testSettersAndGetters() {
-        DepresiationType depreciationType = new DepresiationType();
+        DepreciationType depreciationType = new DepreciationType();
 
         String tipoActivo = "Computadores y equipos de oficina";
         Integer vidaUtil = 5;

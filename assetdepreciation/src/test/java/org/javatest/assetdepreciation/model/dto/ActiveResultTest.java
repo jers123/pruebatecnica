@@ -21,7 +21,7 @@ class ActiveResultTest extends ActiveResultsTest {
         LocalDate fechaCompra = LocalDate.now();
         Double valorCompra = 2000000.0;
         Depreciation depreciacion = Depreciation.COMPUTADORES_OFICINA;
-        DepresiationType depreciationType = new DepresiationType();
+        DepreciationType depreciationType = new DepreciationType();
         depreciationType.setTipoActivo("Computadores y equipos de oficina");
         depreciationType.setVidaUtil(5);
         depreciationType.setPorcentajeAnual(20.0);

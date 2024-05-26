@@ -4,11 +4,14 @@ import org.javatest.assetdepreciation.model.Depreciation;
 import org.javatest.assetdepreciation.model.dto.ActiveDTO;
 import org.javatest.assetdepreciation.model.dto.ActiveResult;
 import org.javatest.assetdepreciation.model.dto.ActiveResults;
-import org.javatest.assetdepreciation.model.dto.DepresiationType;
+import org.javatest.assetdepreciation.model.dto.DepreciationType;
 import org.javatest.assetdepreciation.model.entity.Active;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.time.LocalDate;
 
@@ -17,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@TestMethodOrder(OrderAnnotation.class)
 class ActiveMapperTest {
 
     private ActiveMapper mapper;
@@ -46,9 +50,11 @@ class ActiveMapperTest {
     }
 
     @Test
+    @Order(1)
     void testCreate() {
         active = mapper.create(activeDto);
 
+        assertNotNull(active);
         assertNull(active.getIdActive());
         assertNotNull(active.getSerial());
         assertNotNull(active.getName());
@@ -67,9 +73,12 @@ class ActiveMapperTest {
     }
 
     @Test
+    @Order(2)
     void testRead() {
         ActiveResult activeResult = mapper.read(active);
 
+        assertNotNull(activeResult);
+        assertNotNull(activeResult.getIdActivo());
         assertNotNull(activeResult.getSerial());
         assertNotNull(activeResult.getNombre());
         assertNotNull(activeResult.getDescripcion());
@@ -94,9 +103,12 @@ class ActiveMapperTest {
     }
 
     @Test
+    @Order(3)
     public void testReadAll() {
         ActiveResults activeResults = mapper.readAll(active);
 
+        assertNotNull(activeResults);
+        assertNotNull(activeResults.getIdActivo());
         assertNotNull(activeResults.getSerial());
         assertNotNull(activeResults.getNombre());
         assertNotNull(activeResults.getDescripcion());
@@ -121,9 +133,12 @@ class ActiveMapperTest {
     }
 
     @Test
+    @Order(4)
     public void testUpdate() {
+        active = null;
         active = mapper.update(activeDto, active);
 
+        assertNotNull(active);
         assertNotNull(active.getIdActive());
         assertNotNull(active.getSerial());
         assertNotNull(active.getName());
@@ -144,16 +159,16 @@ class ActiveMapperTest {
     @Test
     void testreadDepresiationType() {
         Depreciation depreciation = Depreciation.COMPUTADORES_OFICINA;
-        DepresiationType depresiationType = mapper.readDepresiationType(depreciation);
+        DepreciationType depreciationType = mapper.readDepreciationType(depreciation);
 
-        assertNotNull(depresiationType);
-        assertNotNull(depresiationType.getTipoActivo());
-        assertNotNull(depresiationType.getVidaUtil());
-        assertNotNull(depresiationType.getPorcentajeAnual());
+        assertNotNull(depreciationType);
+        assertNotNull(depreciationType.getTipoActivo());
+        assertNotNull(depreciationType.getVidaUtil());
+        assertNotNull(depreciationType.getPorcentajeAnual());
 
-        assertEquals(depreciation.getActiveType(), depresiationType.getTipoActivo());
-        assertEquals(depreciation.getUsefulLife(), depresiationType.getVidaUtil());
-        assertEquals(depreciation.getAnnualPercentage(), depresiationType.getPorcentajeAnual());
+        assertEquals(depreciation.getActiveType(), depreciationType.getTipoActivo());
+        assertEquals(depreciation.getUsefulLife(), depreciationType.getVidaUtil());
+        assertEquals(depreciation.getAnnualPercentage(), depreciationType.getPorcentajeAnual());
     }
 
     @AfterEach

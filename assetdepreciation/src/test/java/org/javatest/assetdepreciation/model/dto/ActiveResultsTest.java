@@ -27,7 +27,7 @@ class ActiveResultsTest extends ActiveDTOTest {
         activeResults.setFechaCompra(fechaCompra);
         activeResults.setValorCompra(valorCompra);
         activeResults.setDepreciacion(depreciacion);
-        DepresiationType depreciationType = new DepresiationType();
+        DepreciationType depreciationType = new DepreciationType();
         depreciationType.setTipoActivo("Computadores y equipos de oficina");
         depreciationType.setVidaUtil(5);
         depreciationType.setPorcentajeAnual(20.0);

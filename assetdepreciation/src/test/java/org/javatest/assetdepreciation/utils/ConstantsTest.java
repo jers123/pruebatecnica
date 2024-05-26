@@ -1,13 +1,18 @@
 package org.javatest.assetdepreciation.utils;
 
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@TestMethodOrder(OrderAnnotation.class)
 class ConstantsTest {
     @Test
+    @Order(1)
     void testNotNullConstants() {
         assertNotNull(Constants.NO_CONTENT);
         assertNotNull(Constants.NO_CONTENT_ID);
@@ -29,6 +34,7 @@ class ConstantsTest {
     }
 
     @Test
+    @Order(2)
     void testNotEmptyConstants() {
         assertFalse(Constants.NO_CONTENT.isEmpty());
         assertFalse(Constants.NO_CONTENT_ID.isEmpty());
@@ -50,6 +56,7 @@ class ConstantsTest {
     }
 
     @Test
+    @Order(3)
     void testEquealsConstants() {
         assertEquals("No hay registros", Constants.NO_CONTENT);
         assertEquals("No hay registros con el id = ", Constants.NO_CONTENT_ID);

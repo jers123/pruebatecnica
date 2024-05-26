@@ -6,6 +6,9 @@ import jakarta.validation.Validator;
 import org.javatest.assetdepreciation.model.Depreciation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -24,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestMethodOrder(OrderAnnotation.class)
 class ActiveDTOTest {
 
     private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
@@ -44,6 +48,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(1)
     void testSettersAndGetters() {
         Integer idActivo = 1;
         String serial = "12abc3";
@@ -79,12 +84,14 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(2)
     void testValidActiveDTO() {
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
         assertTrue(violations.isEmpty(), "No se esperaban violaciones de validación");
     }
 
     @Test
+    @Order(3)
     void testSerialNull() {
         activeDto.setSerial(null);
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
@@ -99,6 +106,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(4)
     void testSerialLength() {
         activeDto.setSerial("12345678901");
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
@@ -113,6 +121,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(5)
     void testNombreNull() {
         activeDto.setNombre(null);
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
@@ -127,6 +136,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(6)
     void testNombreLength() {
         activeDto.setNombre("Los computadores de mesa son potentes herramientas de computación.");
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
@@ -141,6 +151,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(7)
     void testDescripcionLength() {
         activeDto.setDescripcion("Los computadores de mesa, también conocidos como computadoras de escritorio, son dispositivos versátiles y potentes que ofrecen un rendimiento excepcional para tareas de trabajo, entretenimiento y creación de contenido, brindando una experiencia informática completa y personalizada en un formato fijo y robusto.");
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
@@ -155,6 +166,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(8)
     void testFechaCompraNull() {
         activeDto.setFechaCompra(null);
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
@@ -169,6 +181,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(9)
     void testValorCompraNull() {
         activeDto.setValorCompra(null);
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);
@@ -183,6 +196,7 @@ class ActiveDTOTest {
     }
 
     @Test
+    @Order(10)
     void testDepreciacionNull() {
         activeDto.setDepreciacion(null);
         Set<ConstraintViolation<ActiveDTO>> violations = validator.validate(activeDto);

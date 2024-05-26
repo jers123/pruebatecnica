@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.javatest.assetdepreciation.utils.SystemConstants.ASSET_DEPRECIATION_PATH;
 import static org.javatest.assetdepreciation.utils.SystemConstants.LOCAL_ORIGIN_PATH;
-import static org.javatest.assetdepreciation.utils.SystemConstants.answer;;
+import static org.javatest.assetdepreciation.utils.SystemConstants.answer;
 
 @RestController
 @CrossOrigin(origins = {LOCAL_ORIGIN_PATH,
@@ -28,7 +28,7 @@ import static org.javatest.assetdepreciation.utils.SystemConstants.answer;;
 )
 @RequestMapping(path = ASSET_DEPRECIATION_PATH)
 @Validated
-public class ActivoeController implements IBaseController {
+public class ActiveController implements IBaseController {
 
     @Autowired
     private ActiveService service;

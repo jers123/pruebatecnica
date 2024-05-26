@@ -3,7 +3,7 @@ package org.javatest.assetdepreciation.utils;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-public class SystemConstants {
+public final class SystemConstants {
     public static final String LOCAL_ORIGIN_PATH = "http://localhost:8080";
     public static final String ASSET_DEPRECIATION_PATH = "/assetdepreciation";
     public static final String CREATE_PATH = "/create";
@@ -29,7 +29,12 @@ public class SystemConstants {
     public static final String PURCHASE_VALUE = "valor_compra";
     public static final String SERIAL = "serial";
     public static final int SERIAL_LENGTH = 10;
+    public static final String ACTIVE_ID_QUERY = "SELECT a FROM Active a WHERE a.idActive = :" + ID;
     public static final String ACTIVE_SERIAL_QUERY = "SELECT a.serial FROM Active a WHERE LOWER(a.serial) = LOWER(:" + SERIAL + ") AND a.idActive != :" + ID;
+
+    public SystemConstants() {
+
+    }
 
     public static ResponseEntity<ReplyMessage> answer(ReplyMessage replyMessage) {
         return ResponseEntity

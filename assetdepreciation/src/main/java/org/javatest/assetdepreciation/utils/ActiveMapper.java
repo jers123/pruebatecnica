@@ -3,7 +3,7 @@ package org.javatest.assetdepreciation.utils;
 import org.javatest.assetdepreciation.model.dto.ActiveDTO;
 import org.javatest.assetdepreciation.model.dto.ActiveResult;
 import org.javatest.assetdepreciation.model.dto.ActiveResults;
-import org.javatest.assetdepreciation.model.dto.DepresiationType;
+import org.javatest.assetdepreciation.model.dto.DepreciationType;
 import org.javatest.assetdepreciation.model.entity.Active;
 import org.javatest.assetdepreciation.model.Depreciation;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,7 @@ public class ActiveMapper {
         entityDto.setFechaCompra(entity.getPurchaseDate());
         entityDto.setValorCompra(entity.getPurchaseValue());
         entityDto.setDepreciacion(entity.getDepreciationType());
-        entityDto.setTipoDepreciacion(readDepresiationType(entity.getDepreciationType()));
+        entityDto.setTipoDepreciacion(readDepreciationType(entity.getDepreciationType()));
         return entityDto;
     }
 
@@ -44,7 +44,7 @@ public class ActiveMapper {
         entityDto.setFechaCompra(entity.getPurchaseDate());
         entityDto.setValorCompra(entity.getPurchaseValue());
         entityDto.setDepreciacion(entity.getDepreciationType());
-        entityDto.setTipoDepreciacion(readDepresiationType(entity.getDepreciationType()));
+        entityDto.setTipoDepreciacion(readDepreciationType(entity.getDepreciationType()));
         return entityDto;
     }
 
@@ -58,8 +58,8 @@ public class ActiveMapper {
         return entity;
     }
 
-    protected DepresiationType readDepresiationType(Depreciation depreciation) {
-        DepresiationType depreciationType = new DepresiationType();
+    protected DepreciationType readDepreciationType(Depreciation depreciation) {
+        DepreciationType depreciationType = new DepreciationType();
         depreciationType.setTipoActivo(depreciation.getActiveType());
         depreciationType.setVidaUtil(depreciation.getUsefulLife());
         depreciationType.setPorcentajeAnual(depreciation.getAnnualPercentage());

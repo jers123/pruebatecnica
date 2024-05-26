@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class DepresiationType {
+public class DepreciationType {
     private String tipoActivo;
     private Integer vidaUtil;
     private Double porcentajeAnual;

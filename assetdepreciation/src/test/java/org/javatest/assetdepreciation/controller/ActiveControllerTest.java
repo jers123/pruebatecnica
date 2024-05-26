@@ -10,6 +10,8 @@ import org.javatest.assetdepreciation.utils.ReplyMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -30,8 +32,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(ActivoeController.class)
-class ActivoeControllerTest {
+@MockitoSettings(strictness = Strictness.LENIENT)
+@WebMvcTest(ActiveController.class)
+class ActiveControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -49,8 +52,14 @@ class ActivoeControllerTest {
         response.setHttpStatus(HttpStatus.CREATED);
         response.setError(false);
         response.setMessage(singletonList(SUCCESSFULLY_CREATED_ACTIVE));
+        response.setObject(new Object());
 
         when(service.getCreate(activeDto)).thenReturn(response);
+        when(replyMessage.getDate()).thenReturn(response.getDate());
+        when(replyMessage.getHttpStatus()).thenReturn(response.getHttpStatus());
+        when(replyMessage.getError()).thenReturn(response.getError());
+        when(replyMessage.getMessage()).thenReturn(response.getMessage());
+        when(replyMessage.getObject()).thenReturn(response.getObject());
 
         mockMvc.perform(post(ASSET_DEPRECIATION_PATH + CREATE_PATH)
                         .contentType(MediaType.APPLICATION_JSON)

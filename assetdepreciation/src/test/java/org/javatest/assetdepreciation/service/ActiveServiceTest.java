@@ -1,10 +1,7 @@
 package org.javatest.assetdepreciation.service;
 
 import org.javatest.assetdepreciation.model.Depreciation;
-import org.javatest.assetdepreciation.model.dto.ActiveDTO;
-import org.javatest.assetdepreciation.model.dto.ActiveResult;
-import org.javatest.assetdepreciation.model.dto.Depreciacion;
-import org.javatest.assetdepreciation.model.dto.DepresiationType;
+import org.javatest.assetdepreciation.model.dto.*;
 import org.javatest.assetdepreciation.model.entity.Active;
 import org.javatest.assetdepreciation.model.repository.ActiveRepository;
 import org.javatest.assetdepreciation.utils.ActiveMapper;
@@ -22,8 +19,10 @@ import org.springframework.http.HttpStatus;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.javatest.assetdepreciation.utils.Constants.SUCCESSFULLY_CREATED_ACTIVE;
+import static org.javatest.assetdepreciation.utils.Constants.SUCCESSFULLY_UPDATED_ACTIVE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -64,8 +63,6 @@ class ActiveServiceTest {
         assertNotNull(replyMessage.getObject());
     }
 
-
-
     // Similar tests can be created for getFindAll, getFindById, getUpdate, and getDelete methods.
 
     private ActiveDTO getActiveDTO() {
@@ -92,8 +89,26 @@ class ActiveServiceTest {
         return active;
     }
 
+    private ActiveResults getActiveResults() {
+        DepreciationType depreciationType = new DepreciationType();
+        depreciationType.setTipoActivo("Computadores y equipos de oficina");
+        depreciationType.setVidaUtil(5);
+        depreciationType.setPorcentajeAnual(20.0);
+
+        ActiveResults activeResult = new ActiveResults();
+        activeResult.setIdActivo(1);
+        activeResult.setSerial("12abc3");
+        activeResult.setNombre("pc de mesa");
+        activeResult.setDescripcion("pc todo en uno");
+        activeResult.setFechaCompra(LocalDate.now());
+        activeResult.setValorCompra(2000000.0);
+        activeResult.setDepreciacion(Depreciation.COMPUTADORES_OFICINA);
+        activeResult.setTipoDepreciacion(depreciationType);
+        return activeResult;
+    }
+
     private ActiveResult getActiveResult() {
-        DepresiationType depreciationType = new DepresiationType();
+        DepreciationType depreciationType = new DepreciationType();
         depreciationType.setTipoActivo("Computadores y equipos de oficina");
         depreciationType.setVidaUtil(5);
         depreciationType.setPorcentajeAnual(20.0);
